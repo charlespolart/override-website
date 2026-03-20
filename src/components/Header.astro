@@ -1,0 +1,125 @@
+---
+import { getTranslations } from '../i18n/translations';
+import type { Lang } from '../i18n/translations';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = getTranslations(lang);
+const alternateLang = lang === 'fr' ? 'en' : 'fr';
+const currentPath = Astro.url.pathname;
+const alternatePath = currentPath.replace(`/${lang}`, `/${alternateLang}`);
+
+const navItems = [
+  { label: t.nav.home, href: `/${lang}` },
+  { label: t.nav.services, href: `/${lang}/services` },
+  { label: t.nav.about, href: `/${lang}/about` },
+  { label: t.nav.contact, href: `/${lang}/contact` },
+];
+---
+
+<header class="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/50 bg-surface/80 backdrop-blur-xl">
+  <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href={`/${lang}`} class="flex items-center gap-2 shrink-0" aria-label="OVERRIDE - Home">
+      <img src="/logo.svg" alt="OVERRIDE" class="h-5" />
+    </a>
+
+    <div class="hidden md:flex items-center gap-8">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            'text-sm font-medium transition-colors duration-200',
+            currentPath === item.href || (item.href !== `/${lang}` && currentPath.startsWith(item.href))
+              ? 'text-white'
+              : 'text-zinc-400 hover:text-white',
+          ]}
+        >
+          {item.label}
+        </a>
+      ))}
+    </div>
+
+    <div class="hidden md:flex items-center gap-4">
+      <a
+        href={alternatePath}
+        class="text-sm font-mono text-zinc-500 hover:text-white transition-colors duration-200 uppercase"
+      >
+        {alternateLang}
+      </a>
+      <a href={`/${lang}/contact`} class="btn-primary text-sm !py-2 !px-4">
+        {t.nav.contact}
+      </a>
+    </div>
+
+    <button
+      id="menu-toggle"
+      class="md:hidden flex flex-col gap-1.5 p-2"
+      aria-label="Menu"
+      aria-expanded="false"
+    >
+      <span class="block w-5 h-0.5 bg-white transition-all duration-200 origin-center" id="bar1"></span>
+      <span class="block w-5 h-0.5 bg-white transition-all duration-200" id="bar2"></span>
+      <span class="block w-5 h-0.5 bg-white transition-all duration-200 origin-center" id="bar3"></span>
+    </button>
+  </nav>
+
+  <div
+    id="mobile-menu"
+    class="md:hidden hidden border-t border-zinc-800/50 bg-surface/95 backdrop-blur-xl"
+  >
+    <div class="px-6 py-6 flex flex-col gap-4">
+      {navItems.map((item) => (
+        <a
+          href={item.href}
+          class:list={[
+            'text-base font-medium transition-colors duration-200',
+            currentPath === item.href || (item.href !== `/${lang}` && currentPath.startsWith(item.href))
+              ? 'text-white'
+              : 'text-zinc-400 hover:text-white',
+          ]}
+        >
+          {item.label}
+        </a>
+      ))}
+      <hr class="border-zinc-800" />
+      <div class="flex items-center justify-between">
+        <a
+          href={alternatePath}
+          class="text-sm font-mono text-zinc-500 hover:text-white transition-colors duration-200 uppercase"
+        >
+          {alternateLang === 'fr' ? 'Fran\u00E7ais' : 'English'}
+        </a>
+        <a href={`/${lang}/contact`} class="btn-primary text-sm !py-2 !px-4">
+          {t.nav.contact}
+        </a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<script>
+  const toggle = document.getElementById('menu-toggle')!;
+  const menu = document.getElementById('mobile-menu')!;
+  const bar1 = document.getElementById('bar1')!;
+  const bar2 = document.getElementById('bar2')!;
+  const bar3 = document.getElementById('bar3')!;
+
+  toggle.addEventListener('click', () => {
+    const isOpen = !menu.classList.contains('hidden');
+    menu.classList.toggle('hidden');
+    toggle.setAttribute('aria-expanded', String(!isOpen));
+
+    if (!isOpen) {
+      bar1.style.transform = 'rotate(45deg) translate(2.5px, 2.5px)';
+      bar2.style.opacity = '0';
+      bar3.style.transform = 'rotate(-45deg) translate(2.5px, -2.5px)';
+    } else {
+      bar1.style.transform = '';
+      bar2.style.opacity = '';
+      bar3.style.transform = '';
+    }
+  });
+</script>

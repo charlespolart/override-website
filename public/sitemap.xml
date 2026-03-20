@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://overridedev.com/fr</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://overridedev.com/fr"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://overridedev.com/en"/>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://overridedev.com/en</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://overridedev.com/fr"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://overridedev.com/en"/>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://overridedev.com/fr/services</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://overridedev.com/fr/services"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://overridedev.com/en/services"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://overridedev.com/en/services</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://overridedev.com/fr/services"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://overridedev.com/en/services"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://overridedev.com/fr/about</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://overridedev.com/fr/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://overridedev.com/en/about"/>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://overridedev.com/en/about</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://overridedev.com/fr/about"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://overridedev.com/en/about"/>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://overridedev.com/fr/contact</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://overridedev.com/fr/contact"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://overridedev.com/en/contact"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://overridedev.com/en/contact</loc>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://overridedev.com/fr/contact"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://overridedev.com/en/contact"/>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://overridedev.com/legal</loc>
+    <priority>0.3</priority>
+  </url>
+</urlset>
