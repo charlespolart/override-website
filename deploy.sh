@@ -26,7 +26,7 @@ sudo systemctl stop $SERVICE_NAME 2>/dev/null || true
 
 # Install dependencies
 echo "Installing dependencies..."
-npm install
+npm install --legacy-peer-deps
 
 # Build the project
 echo "Building the project..."
