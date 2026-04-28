@@ -1,3 +1,96 @@
 ---
-return Astro.redirect('/fr');
+import Layout from '../layouts/Layout.astro';
+import { getTranslations } from '../i18n/translations';
+import { localUrl } from '../i18n/url';
+
+const lang = 'fr';
+const t = getTranslations(lang);
 ---
+
+<Layout title={t.meta.homeTitle} description={t.meta.homeDescription} lang={lang}>
+  <!-- Hero -->
+  <section class="pt-32 pb-20 md:pt-44 md:pb-32 px-6">
+    <div class="max-w-4xl mx-auto text-center">
+      <h1 class="text-4xl md:text-6xl font-bold tracking-tight leading-tight mb-6 fade-in">
+        {t.hero.title}
+      </h1>
+      <p class="text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 fade-in">
+        {t.hero.subtitle}
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 fade-in">
+        <a href={localUrl('/contact', lang)} class="btn-primary">{t.hero.cta}</a>
+        <a href={localUrl('/services', lang)} class="btn-secondary">{t.hero.ctaSecondary}</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services preview -->
+  <section class="py-20 md:py-28 px-6 border-t border-zinc-800/50">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-2xl md:text-3xl font-bold text-center mb-16 fade-in">{t.servicesPreview.title}</h2>
+      <div class="grid md:grid-cols-3 gap-8">
+        {[t.servicesPreview.web, t.servicesPreview.desktop, t.servicesPreview.mobile].map((service, i) => (
+          <div class="p-6 rounded-xl border border-zinc-800/50 bg-surface-light/50 hover:border-accent/30 transition-all duration-300 fade-in">
+            <div class="w-10 h-10 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
+              <span class="text-accent font-mono text-sm font-bold">
+                {['</>', '#_', '[ ]'][i]}
+              </span>
+            </div>
+            <h3 class="text-lg font-semibold mb-2">{service.title}</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed">{service.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Why OVERRIDE -->
+  <section class="py-20 md:py-28 px-6 border-t border-zinc-800/50">
+    <div class="max-w-6xl mx-auto">
+      <h2 class="text-2xl md:text-3xl font-bold text-center mb-16 fade-in">{t.why.title}</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        {t.why.items.map((item) => (
+          <div class="fade-in">
+            <div class="w-1 h-8 bg-accent rounded-full mb-4"></div>
+            <h3 class="text-lg font-semibold mb-2">{item.title}</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed">{item.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Process -->
+  <section class="py-20 md:py-28 px-6 border-t border-zinc-800/50">
+    <div class="max-w-4xl mx-auto">
+      <h2 class="text-2xl md:text-3xl font-bold text-center mb-16 fade-in">{t.process.title}</h2>
+      <div class="grid sm:grid-cols-2 gap-6">
+        {t.process.steps.map((step) => (
+          <div class="flex gap-4 p-6 rounded-xl border border-zinc-800/50 bg-surface-light/30 fade-in">
+            <span class="text-accent font-mono text-2xl font-bold shrink-0">{step.number}</span>
+            <div>
+              <h3 class="font-semibold mb-1">{step.title}</h3>
+              <p class="text-zinc-400 text-sm">{step.description}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 md:py-28 px-6 border-t border-zinc-800/50">
+    <div class="max-w-2xl mx-auto text-center fade-in">
+      <h2 class="text-2xl md:text-3xl font-bold mb-6">{t.ctaSection.title}</h2>
+      <a
+        href={`mailto:${t.ctaSection.email}`}
+        class="text-accent hover:text-accent-light text-lg font-mono transition-colors duration-200"
+      >
+        {t.ctaSection.email}
+      </a>
+      <div class="mt-8">
+        <a href={localUrl('/contact', lang)} class="btn-primary">{t.nav.contact}</a>
+      </div>
+    </div>
+  </section>
+</Layout>

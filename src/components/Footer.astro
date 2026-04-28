@@ -1,6 +1,7 @@
 ---
 import { getTranslations } from '../i18n/translations';
 import type { Lang } from '../i18n/translations';
+import { localUrl } from '../i18n/url';
 
 interface Props {
   lang: Lang;
@@ -17,7 +18,7 @@ const year = new Date().getFullYear();
       <span>&copy; {year} OVERRIDE. {t.footer.rights}</span>
     </div>
     <div class="flex items-center gap-6 text-sm">
-      <a href={`/${lang}/legal`} class="text-zinc-500 hover:text-white transition-colors duration-200">
+      <a href={localUrl('/legal', lang)} class="text-zinc-500 hover:text-white transition-colors duration-200">
         {t.footer.legal}
       </a>
       <a

@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getTranslations } from '../../i18n/translations';
+import { localUrl } from '../../i18n/url';
 
 const lang = 'en';
 const t = getTranslations(lang);
@@ -52,7 +53,7 @@ const t = getTranslations(lang);
   <section class="py-20 px-6 border-t border-zinc-800/50">
     <div class="max-w-2xl mx-auto text-center fade-in">
       <h2 class="text-2xl md:text-3xl font-bold mb-6">{t.ctaSection.title}</h2>
-      <a href={`/${lang}/contact`} class="btn-primary">{t.nav.contact}</a>
+      <a href={localUrl('/contact', lang)} class="btn-primary">{t.nav.contact}</a>
     </div>
   </section>
 </Layout>

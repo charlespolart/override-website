@@ -1,6 +1,7 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import { getTranslations } from '../../i18n/translations';
+import { localUrl } from '../../i18n/url';
 
 const lang = 'en';
 const t = getTranslations(lang);
@@ -17,8 +18,8 @@ const t = getTranslations(lang);
         {t.hero.subtitle}
       </p>
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 fade-in">
-        <a href={`/${lang}/contact`} class="btn-primary">{t.hero.cta}</a>
-        <a href={`/${lang}/services`} class="btn-secondary">{t.hero.ctaSecondary}</a>
+        <a href={localUrl('/contact', lang)} class="btn-primary">{t.hero.cta}</a>
+        <a href={localUrl('/services', lang)} class="btn-secondary">{t.hero.ctaSecondary}</a>
       </div>
     </div>
   </section>
@@ -88,7 +89,7 @@ const t = getTranslations(lang);
         {t.ctaSection.email}
       </a>
       <div class="mt-8">
-        <a href={`/${lang}/contact`} class="btn-primary">{t.nav.contact}</a>
+        <a href={localUrl('/contact', lang)} class="btn-primary">{t.nav.contact}</a>
       </div>
     </div>
   </section>

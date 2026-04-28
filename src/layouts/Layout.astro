@@ -1,18 +1,20 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { alternateUrl } from '../i18n/url';
+import type { Lang } from '../i18n/translations';
 import '../styles/global.css';
 
 interface Props {
   title: string;
   description: string;
-  lang: 'fr' | 'en';
+  lang: Lang;
 }
 
 const { title, description, lang } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? 'https://overridedev.com');
-const alternateLang = lang === 'fr' ? 'en' : 'fr';
-const alternatePath = Astro.url.pathname.replace(`/${lang}`, `/${alternateLang}`);
+const alternateLang: Lang = lang === 'fr' ? 'en' : 'fr';
+const alternatePath = alternateUrl(Astro.url.pathname, lang);
 const alternateURL = new URL(alternatePath, Astro.site ?? 'https://overridedev.com');
 ---
 

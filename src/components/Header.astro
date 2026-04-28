@@ -1,6 +1,7 @@
 ---
 import { getTranslations } from '../i18n/translations';
 import type { Lang } from '../i18n/translations';
+import { localUrl, alternateUrl } from '../i18n/url';
 
 interface Props {
   lang: Lang;
@@ -8,21 +9,22 @@ interface Props {
 
 const { lang } = Astro.props;
 const t = getTranslations(lang);
-const alternateLang = lang === 'fr' ? 'en' : 'fr';
+const alternateLang: Lang = lang === 'fr' ? 'en' : 'fr';
 const currentPath = Astro.url.pathname;
-const alternatePath = currentPath.replace(`/${lang}`, `/${alternateLang}`);
+const alternatePath = alternateUrl(currentPath, lang);
+const homeHref = localUrl('/', lang);
 
 const navItems = [
-  { label: t.nav.home, href: `/${lang}` },
-  { label: t.nav.services, href: `/${lang}/services` },
-  { label: t.nav.about, href: `/${lang}/about` },
-  { label: t.nav.contact, href: `/${lang}/contact` },
+  { label: t.nav.home, href: homeHref },
+  { label: t.nav.services, href: localUrl('/services', lang) },
+  { label: t.nav.about, href: localUrl('/about', lang) },
+  { label: t.nav.contact, href: localUrl('/contact', lang) },
 ];
 ---
 
 <header class="fixed top-0 left-0 right-0 z-50 border-b border-zinc-800/50 bg-surface/80 backdrop-blur-xl">
   <nav class="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
-    <a href={`/${lang}`} class="flex items-center gap-2 shrink-0" aria-label="OVERRIDE - Home">
+    <a href={homeHref} class="flex items-center gap-2 shrink-0" aria-label="OVERRIDE - Home">
       <img src="/logo.svg" alt="OVERRIDE" class="h-5" />
     </a>
 
@@ -32,7 +34,7 @@ const navItems = [
           href={item.href}
           class:list={[
             'text-sm font-medium transition-colors duration-200',
-            currentPath === item.href || (item.href !== `/${lang}` && currentPath.startsWith(item.href))
+            currentPath === item.href || (item.href !== homeHref && currentPath.startsWith(item.href))
               ? 'text-white'
               : 'text-zinc-400 hover:text-white',
           ]}
@@ -49,7 +51,7 @@ const navItems = [
       >
         {alternateLang}
       </a>
-      <a href={`/${lang}/contact`} class="btn-primary text-sm !py-2 !px-4">
+      <a href={localUrl('/contact', lang)} class="btn-primary text-sm !py-2 !px-4">
         {t.nav.contact}
       </a>
     </div>
@@ -76,7 +78,7 @@ const navItems = [
           href={item.href}
           class:list={[
             'text-base font-medium transition-colors duration-200',
-            currentPath === item.href || (item.href !== `/${lang}` && currentPath.startsWith(item.href))
+            currentPath === item.href || (item.href !== homeHref && currentPath.startsWith(item.href))
               ? 'text-white'
               : 'text-zinc-400 hover:text-white',
           ]}
@@ -92,7 +94,7 @@ const navItems = [
         >
           {alternateLang === 'fr' ? 'Fran\u00E7ais' : 'English'}
         </a>
-        <a href={`/${lang}/contact`} class="btn-primary text-sm !py-2 !px-4">
+        <a href={localUrl('/contact', lang)} class="btn-primary text-sm !py-2 !px-4">
           {t.nav.contact}
         </a>
       </div>
